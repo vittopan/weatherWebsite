@@ -1,0 +1,46 @@
+body {
+    background-image: url('../Images/brightertoo.png'); /* Path to your background image */
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh; /* Ensure the background covers the entire viewport height */
+    margin: 0;
+    padding: 0;
+}
+.feedBox {
+    background: rgba(239, 238, 238, 0.5);
+    padding: 50px;
+    border-radius: 10px;
+    height: max-content;
+    margin: 20px;
+    border-color: #000000;
+    border-width: 10;
+    display: flexbox;
+    overflow-wrap: normal;
+    
+  }
+
+  .feedBoxSwell {
+    transition: margin 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+
+
+  .feedBoxSwell:hover {
+    margin: 10px;
+    opacity: 0.9;
+    transition: margin 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+  .feedbox h1 {
+    padding-bottom: 2px;
+    padding-left: 20px;
+    margin-left: 10px;
+  }
+
+  .feedBox p {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 550;
+    padding-bottom: 2px;
+    padding-left: 20px;
+  }

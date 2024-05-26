@@ -1,5 +1,6 @@
 import requests
 from geopy.geocoders import Nominatim
+from app.models import Location
 
 def get_weather(location):
     API_KEY = 'GWYm9XH0pw9IN0pk72zylGTmSZ7b1LBX'  # Replace with your actual API key

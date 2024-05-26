@@ -24,7 +24,7 @@ def get_weather_route():
     if weather:
         return render_template('home.html', weather=weather, error=None)
     else:
-        return render_template('index.html', weather=None, error="Location not found or weather data not available")
+        return render_template('home.html', weather=None, error="Location not found or weather data not available")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

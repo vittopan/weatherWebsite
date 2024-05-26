@@ -11,7 +11,7 @@
     </form>
     <div id="weatherResult" class="mt-5">
         {% if weather %}
-            <h2>Weather in {{ weather.address. }}:</h2>
+            <h2>Weather in {{request.form['location'].capitalize()}}:</h2>
             <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
             <p><strong>Humidity:</strong> {{ weather.humidity }} %</p>
             <p><strong>Wind Speed:</strong> {{ weather.wind_speed }} m/s</p>

@@ -3,6 +3,15 @@ from app.forms.forms import LoginForm, createAccount
 from app.models import db, User, Location
 import requests
 from geopy.geocoders import Nominatim
+from datetime import datetime, timedelta
+
+# Get current date
+#date = datetime.now()
+#Below is how to get the next dates.
+# tomorrow_date = current_date + timedelta(days=1) 
+# Format date and month as "Month Day" This is what goes in the HTML
+# formatted_date = current_date.strftime("%B %d") 
+
 app=Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -21,10 +30,13 @@ def home():
 def get_weather_route():
     location = request.form['location']
     weather = get_weather(location)
+    current_date = datetime.now()
+    all_dates = [current_date + timedelta(days=i) for i in range(-1,6)]
     if weather:
-        return render_template('home.html', weather=weather, error=None)
+        # weather, today, and dates are variables you pass to html, so that it can access it.
+        return render_template('home.html', weather=weather, today=current_date, dates=all_dates, error=None)
     else:
-        return render_template('home.html', weather=None, error="Location not found or weather data not available")
+        return render_template('home.html', weather=None, today=current_date, dates=all_dates,  error="Location not found or weather data not available")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -86,6 +98,7 @@ def get_weather(location):
 
 
 if __name__ == '__main__':
+    
     app.run(debug=True)
 
 

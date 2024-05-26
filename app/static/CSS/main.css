@@ -1,13 +1,4 @@
-body {
-    background-image: url('../Images/brightertoo.png'); /* Path to your background image */
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100vh; /* Ensure the background covers the entire viewport height */
-    margin: 0;
-    padding: 0;
-}
+
 .feedBox {
     background: rgba(239, 238, 238, 0.5);
     padding: 50px;
@@ -18,7 +9,6 @@ body {
     border-width: 10;
     display: flexbox;
     overflow-wrap: normal;
-    
   }
 
   .feedBoxSwell {
@@ -44,3 +34,23 @@ body {
     padding-bottom: 2px;
     padding-left: 20px;
   }
+
+  .contentBox {
+    background-image: url('../Images/PlaceHolder.png');
+    background-blend-mode: multiply, multiply;
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-position: center; /* Centers the image */
+    filter: drop-shadow(-7px 6px 8px #000000);
+    border-radius: 50px;
+    padding: 50px;
+    margin: 20px;
+    color: white; /* Ensure text color contrasts with the background */
+}
+
+.highlight-today {
+    background-image: linear-gradient(to right top, #8101b9, #7006ba, #5d0cbc, #4511bd, #1d16be);
+    background-blend-mode: multiply, multiply;
+    border-radius: 20px;
+    margin: 5px;
+    padding: 5px;
+}

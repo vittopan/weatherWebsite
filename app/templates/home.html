@@ -12,17 +12,26 @@
 </div>
 
 <div class="container contentBox text-white">
-    <div class="container" id="weatherResult" class="mt-5">
-        {% if weather %}
+    <div class="row" id="weatherResult" class="mt-5">
+        <div class="col-6">
+            {% if weather %}
             <h2>Weather in {{request.form['location'].capitalize()}}:</h2>
             <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
             <p><strong>Humidity:</strong> {{ weather.humidity }} %</p>
             <p><strong>Wind Speed:</strong> {{ weather.wind_speed }} m/s</p>
             <p><strong>Weather Code:</strong> {{ weather.weather_code }}</p>
-        {% endif %}
+        {% endif %}        
         {% if error %}
             <p class="text-danger">{{ error }}</p>
         {% endif %}
+        </div>
+        <div class="col-6">
+            {%if weather.weather_code == 1001%}
+            <img src="../static/Images/image.png" alt="">
+            {%else%}
+            <img src="../static/Images/TheNotSeriousProject2.png" alt="">
+            {%endif%}
+        </div>
     </div>
     <div class="container">
         <div class="row">   

@@ -31,7 +31,7 @@ def get_weather_route():
     location = request.form['location']
     weather = get_weather(location)
     current_date = datetime.now()
-    all_dates = [current_date + timedelta(days=i) for i in range(-1,6)]
+    all_dates = [current_date + timedelta(days=i) for i in range(-1,5)]
     if weather:
         # weather, today, and dates are variables you pass to html, so that it can access it.
         return render_template('home.html', weather=weather, today=current_date, dates=all_dates, error=None)

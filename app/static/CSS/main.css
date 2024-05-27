@@ -1,11 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Set the height of the body to 100% of the viewport height */
-  background-image: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
-  background-blend-mode: multiply, multiply;
-}
-
 .feedBox {
     background: rgba(163, 161, 168, 0.2);
     padding: 50px;
@@ -44,4 +36,62 @@ body {
 
 hr.solid {
   border-top: 3px solid #bbb;
+}
+
+.input{
+  background: rgba(163, 161, 168, 0.2);
+  border-radius: 10px;
+}
+
+#default{
+  background-image: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
+  background-blend-mode: multiply, multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
+}
+
+#sunny{
+  background-image: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
+  background-blend-mode: multiply, multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
+}
+
+#cloudy{
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-blend-mode: multiply, multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
+}
+
+
+
+#partlyCloudy{
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  background-blend-mode: multiply, multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
+}
+
+
+#stormy{
+  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+  background-blend-mode: multiply, multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
+}
+
+
+
+#snowy{
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  background-blend-mode: multiply, multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
 }

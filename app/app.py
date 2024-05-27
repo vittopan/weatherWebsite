@@ -20,18 +20,20 @@ API_KEY = 'GWYm9XH0pw9IN0pk72zylGTmSZ7b1LBX'  # Replace with your actual API key
 with app.app_context():
     db.create_all()
 
+# Routes to the home page endpoint.
 @app.route('/')
 @app.route('/home')
 def home():
     return render_template('home.html')
 
+#routes to the get_weather page
 @app.route('/get_weather', methods=['POST'])
 def get_weather_route():
     try:
         location = request.form['location']
         weather = get_weather(location)
         current_date = datetime.now()
-        all_dates = [current_date + timedelta(days=i) for i in range(-1, 5)]
+        all_dates = [current_date + timedelta(days=i) for i in range(0, 5)]
 
         if weather:
             # Pass weather, today, and dates variables to the template
@@ -42,7 +44,7 @@ def get_weather_route():
         print("Error:", e)  # Debugging statement
         return render_template('home.html', weather=None, today=datetime.now(), dates=[], error="Error processing location")
 
-
+# Routes to the login page.
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -55,6 +57,7 @@ def login():
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', form=form)
 
+# Routes to the register page.
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = createAccount()
@@ -67,7 +70,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
+#This is the helper method used to get all the data and put it into JSON
 def get_weather(location):
     geolocator = Nominatim(user_agent="weather_app")
     try:

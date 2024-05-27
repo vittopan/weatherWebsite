@@ -31,15 +31,15 @@ def home():
 def get_weather_route():
     try:
         location = request.form['location']
-        weather = get_weather(location)
+        weather, lat, lon = get_weather(location)
         current_date = datetime.now()
         all_dates = [current_date + timedelta(days=i) for i in range(0, 5)]
 
         if weather:
             # Pass weather, today, and dates variables to the template
-            return render_template('home.html', weather=weather, today=current_date, dates=all_dates, error=None)
+            return render_template('home.html', weather=weather, today=current_date, dates=all_dates, lat=lat, lng=lon, error=None)
         else:
-            return render_template('home.html', weather=None, today=current_date, dates=all_dates, error="Location not found or weather data not available")
+            return render_template('home.html', weather=None, today=current_date, dates=all_dates, lat=lat, lng=lon, error="Location not found or weather data not available")
     except Exception as e:
         print("Error:", e)  # Debugging statement
         return render_template('home.html', weather=None, today=datetime.now(), dates=[], error="Error processing location")
@@ -95,14 +95,14 @@ def get_weather(location):
                     "humidity": humidity,
                     "wind_speed": wind_speed,
                     "weather_code": weather_code
-                }
+                }, lat, lng
             else:
-                return None
+                return None, None, None
         else:
-            return None
+            return None, None, None
     except Exception as e:
         print(f"Error fetching weather data: {e}")
-        return None
+        return None, None, None
 
 
 if __name__ == '__main__':

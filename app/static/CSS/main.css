@@ -7,7 +7,7 @@ body {
 }
 
 .feedBox {
-    background: rgba(163, 161, 168, 0.3);
+    background: rgba(163, 161, 168, 0.2);
     padding: 50px;
     border-radius: 10px;
     height: max-content;

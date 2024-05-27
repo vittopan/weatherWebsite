@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% block content %}
+
 <!-- Form Container to get the actual location. -->
 <div class="container-fluid feedBox feedBoxSwell">
     <h1 class="text-white mt-5">Weather App</h1>
@@ -36,14 +37,14 @@
     </div>
 </div>
 <!-- Container to tell the weekly forecast -->
-<div class="container-fluid">
+<div class="container-fluid pb-5">
     <div class="row">
         <div class="col-md-3 feedBox feedBoxSwell">
             <h4>Weekly Forecast</h4>
             <hr class="solid">
             <div class="container">
                 <div class="row">
-                    {%for date in dates%}
+                    {% for date in dates %}
                         <div class="col-6">
                             <p class="no-margin"><strong>{{ date.strftime("%A") }}</strong></p>
                             <p class="no-margin">{{ date.strftime("%B %d") }}</p>
@@ -52,13 +53,16 @@
                             <!-- Here will go the weather details. -->
                             <p>Placeholder</p>
                         </div>
-                    {%endfor%}
+                    {% endfor %}
                 </div>
             </div>
         </div>
         <div class="col-md feedBox feedBoxSwell" style="height: inherit;">
             <h4>Map</h4>
             <hr class="solid">
+            <div style="height: 420px; overflow: hidden;">
+                <img class="img-fluid" src="../static/Images/MapImage.png" alt="googleMaps" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 # weatherWebsite
  Website to see the weather forecast
+ API cost money and i'm broke so I used an image of perth.
 
 # Aims
 To create an intuitive and user-friendly weather website that provides accurate, real-time weather information and forecasts, enabling users to make informed decisions based on current and upcoming weather conditions.

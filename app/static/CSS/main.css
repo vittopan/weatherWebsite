@@ -1,6 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the height of the body to 100% of the viewport height */
+  background-image: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
+  background-blend-mode: multiply, multiply;
+}
 
 .feedBox {
-    background: rgba(239, 238, 238, 0.5);
+    background: rgba(248, 246, 246, 0.7);
     padding: 50px;
     border-radius: 10px;
     height: max-content;
@@ -35,22 +42,6 @@
     padding-left: 20px;
   }
 
-  .contentBox {
-    background-image: url('../Images/PlaceHolder.png');
-    background-blend-mode: multiply, multiply;
-    background-size: cover; /* Ensures the image covers the entire container */
-    background-position: center; /* Centers the image */
-    filter: drop-shadow(-7px 6px 8px #000000);
-    border-radius: 50px;
-    padding: 50px;
-    margin: 20px;
-    color: white; /* Ensure text color contrasts with the background */
-}
-
-.highlight-today {
-    background-image: linear-gradient(to right top, #8101b9, #7006ba, #5d0cbc, #4511bd, #1d16be);
-    background-blend-mode: multiply, multiply;
-    border-radius: 20px;
-    margin: 5px;
-    padding: 5px;
+hr.solid {
+  border-top: 3px solid #bbb;
 }

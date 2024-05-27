@@ -1,5 +1,5 @@
-{%extends 'index.html'%}
-{%block content%}
+{% extends 'index.html' %}
+{% block content %}
 <div class="container feedBox feedBoxSwell">
     <h1 class="text-white mt-5">Weather App</h1>
     <form id="weatherForm" class="mt-3" method="POST" action="/get_weather">
@@ -11,44 +11,32 @@
     </form>
 </div>
 
-<div class="container contentBox text-white">
+<div class="container text-white">
     <div class="row" id="weatherResult" class="mt-5">
         <div class="col-6">
             {% if weather %}
-            <h2>Weather in {{request.form['location'].capitalize()}}:</h2>
+            <h2>Weather in {{ request.form['location'].capitalize() }}:</h2>
             <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
             <p><strong>Humidity:</strong> {{ weather.humidity }} %</p>
             <p><strong>Wind Speed:</strong> {{ weather.wind_speed }} m/s</p>
             <p><strong>Weather Code:</strong> {{ weather.weather_code }}</p>
-        {% endif %}        
-        {% if error %}
-            <p class="text-danger">{{ error }}</p>
+        {% else %}
+            <p>No weather data available</p>
         {% endif %}
-        </div>
-        <div class="col-6" >
-            {%if weather.weather_code == 1102%}
-            <img src="../static/Images/image.png" alt="" style="height: 50px; width: 50px;">
-            {%else%}
-            <img src="../static/Images/TheNotSeriousProject2.png" alt="" style="height: 50px; width: 50px;">
-            {%endif%}
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">   
-            {% for date in dates %}
-                <div class="col-md-2 text-center">
-                    <p class="no-margin"><strong>{{ date.strftime("%A") }}</strong></p>
-                    <p class="no-margin">{{ date.strftime("%B %d") }}</p>
-                </div>
-            {% endfor %}
         </div>
     </div>
 </div>
+<div class="container text-white">
+    {%if weather%}
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="text-center"style="font-size: 50px;">My Location</h1>
+            <h4>{{request.form['location'].capitalize()}}</h4>
+            <h1 class="text-center"style="font-size: 120px;">{{weather.temperature | int}}°</h1>
+            <h3>{{today.strftime("%A %B %d")}}</h3>
+        </div>  
+    </div>
+    {%endif%}
+</div>
 
-{%endblock content%}
-
-
-
-
-
-
+{% endblock content %}

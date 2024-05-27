@@ -4,7 +4,6 @@ from app.models import db, User, Location
 import requests
 from geopy.geocoders import Nominatim
 from datetime import datetime, timedelta
-
 # Get current date
 #date = datetime.now()
 #Below is how to get the next dates.
@@ -28,15 +27,21 @@ def home():
 
 @app.route('/get_weather', methods=['POST'])
 def get_weather_route():
-    location = request.form['location']
-    weather = get_weather(location)
-    current_date = datetime.now()
-    all_dates = [current_date + timedelta(days=i) for i in range(-1,5)]
-    if weather:
-        # weather, today, and dates are variables you pass to html, so that it can access it.
-        return render_template('home.html', weather=weather, today=current_date, dates=all_dates, error=None)
-    else:
-        return render_template('home.html', weather=None, today=current_date, dates=all_dates,  error="Location not found or weather data not available")
+    try:
+        location = request.form['location']
+        weather = get_weather(location)
+        current_date = datetime.now()
+        all_dates = [current_date + timedelta(days=i) for i in range(-1, 5)]
+
+        if weather:
+            # Pass weather, today, and dates variables to the template
+            return render_template('home.html', weather=weather, today=current_date, dates=all_dates, error=None)
+        else:
+            return render_template('home.html', weather=None, today=current_date, dates=all_dates, error="Location not found or weather data not available")
+    except Exception as e:
+        print("Error:", e)  # Debugging statement
+        return render_template('home.html', weather=None, today=datetime.now(), dates=[], error="Error processing location")
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -62,6 +67,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+
 def get_weather(location):
     geolocator = Nominatim(user_agent="weather_app")
     try:
@@ -73,7 +79,6 @@ def get_weather(location):
             weather_url = f'https://api.tomorrow.io/v4/timelines?apikey={API_KEY}&location={lat},{lng}&fields=temperature,humidity,windSpeed,weatherCode&timesteps=current&units=metric&timezone=auto'
             response = requests.get(weather_url)
             weather_data = response.json()
-
             if weather_data.get('data'):
                 current_weather = weather_data['data']['timelines'][0]['intervals'][0]['values']
                 temperature = current_weather['temperature']

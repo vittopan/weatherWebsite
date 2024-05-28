@@ -97,3 +97,10 @@ hr.solid {
   height: 100vh; /* Set the height of the body to 100% of the viewport height */
   background-repeat: no-repeat;
 }
+
+
+
+.weatherIcon{
+  height: 50px; 
+  width: 50px;
+}

@@ -95,18 +95,20 @@
                     </div>
                     <div class="col-md text-center">
                         <h3>Conditions</h3>
-                        {%if weather.weather_code == '1000'%}
-                            <p>Sunny</p>
-                        {%elif weather.weather_code == '1101'%}
-                            <p>Partly Cloudy</p>
-                        {%elif weather.weather_code == '1001'%}
-                            <p>Cloudy</p>
-                        {%elif weather.weather_code == '4001'%}
-                            <p>Rainy</p>
-                        {%elif weather.weather_code == '5000'%}
-                            <p>Snow</p>
+                        {%if (weather.weather_code | int) == 1000%}
+                            <img class = "weatherIcon" src="../static/Images/Weather/sunny.png" alt=""><h4>Sunny</h4>
+                        {%elif (weather.weather_code | int) == 1101%}
+                            <img class = "weatherIcon" src="../static/Images/Weather/partlyCloudy.png" alt=""><h4>Partly Cloudy</h4>
+                        {%elif (weather.weather_code | int) == 1001%}
+                            <img class = "weatherIcon" src="../static/Images/Weather/Cloudy.png" alt=""><h4>Cloudy</h4>
+                        {%elif (weather.weather_code | int) == 4001%}
+                            <img  class = "weatherIcon" src="../static/Images/Weather/Rainy.png alt=""><h4>Rainy</h4>
+                        {%elif (weather.weather_code | int) == 5000%}
+                            <img class = "weatherIcon" src="../static/Images/Weather/Snow.png" alt=""><h4>Snow</h4>
+                        {%elif (weather.weather_code | int) == 1102%}
+                            <img class = "weatherIcon" src="../static/Images/Weather/mostlyCloudy.png" alt=""><h4>Mostly Cloudy</h4>
                         {%else%}
-                            <h4>Clear</h4>
+                            <img class = "weatherIcon" src="../static/Images/Weather/sunny.png" alt=""><h4>Clear</h4>
                         {%endif%}
                     </div>
                 </div>

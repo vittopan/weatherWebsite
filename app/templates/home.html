@@ -34,6 +34,13 @@
                         </div>
                     {% endfor %}
                 </div>
+                <div class="row">
+                    {% for hour in timeAdvance %}
+                        <div class="col no-margin">
+                            <h3>{{weather.temperature | int}}°C</h3>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
@@ -53,8 +60,7 @@
                             <p class="no-margin">{{ date.strftime("%B %d") }}</p>
                         </div>
                         <div class="col-6">
-                            <!-- Here will go the weather details. -->
-                            <p>Placeholder</p>
+                            <h3>{{weather.temperature | int}}°C</h3>
                         </div>
                     {% endfor %}
                 </div>

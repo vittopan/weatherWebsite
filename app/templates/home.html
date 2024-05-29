@@ -93,7 +93,7 @@
                         <h3>Humidity</h3>
                         <h4>{{weather.humidity}}</h4>
                     </div>
-                    <div class="col-md text-center">
+                    <div class="col-md text-center" id="weatherContainer" data-weather-code="{{weather.weather_code | int}}">
                         <h3>Conditions</h3>
                         {%if (weather.weather_code | int) == 1000%}
                             <img class = "weatherIcon" src="../static/Images/Weather/sunny.png" alt=""><h4>Sunny</h4>

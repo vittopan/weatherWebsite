@@ -44,60 +44,38 @@ hr.solid {
   border-radius: 10px;
 }
 
-#default{
+body.default{
   background: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
 }
 
-#sunny{
-  background-image: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
-  background-blend-mode: multiply, multiply;
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Set the height of the body to 100% of the viewport height */
-  background-repeat: no-repeat;
+body.sunny{
+  background: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
 }
 
-#cloudy{
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-  background-blend-mode: multiply, multiply;
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Set the height of the body to 100% of the viewport height */
-  background-repeat: no-repeat;
+body.cloudy{
+  background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 
 
-#partlyCloudy{
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  background-blend-mode: multiply, multiply;
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Set the height of the body to 100% of the viewport height */
-  background-repeat: no-repeat;
+body.partlyCloudy{
+  background: linear-gradient(to top, #a1c4fd 0%, #c2e9fb 100%);
 }
 
 
-#stormy{
-  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
-  background-blend-mode: multiply, multiply;
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Set the height of the body to 100% of the viewport height */
-  background-repeat: no-repeat;
+body.stormy{
+  background: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
 }
 
 
 
-#snowy{
-  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
-  background-blend-mode: multiply, multiply;
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* Set the height of the body to 100% of the viewport height */
-  background-repeat: no-repeat;
+body.snow{
+  background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
 
+body.mostlyCloudy{
+  background: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+}
 
 
 .weatherIcon{

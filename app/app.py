@@ -35,7 +35,6 @@ def get_weather_route():
         current_date = datetime.now()
         all_dates = [current_date + timedelta(days=i) for i in range(0, 5)]
         timeAdvance = [datetime.now() + timedelta(hours=i) for i in range(7)]
-
         if weather:
             # Pass weather, today, and dates variables to the template
             return render_template('home.html', weather=weather, today=current_date, dates=all_dates, lat=lat, lng=lon, timeAdvance=timeAdvance, error=None)

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, jsonify
 from app.forms.forms import LoginForm, createAccount
-from app.models import db, User, Location
+from app.models import db, User
 import requests
 from geopy.geocoders import Nominatim
 from datetime import datetime, timedelta
@@ -21,7 +21,6 @@ with app.app_context():
     db.create_all()
 
 # Routes to the home page endpoint.
-@app.route('/')
 @app.route('/home')
 def home():
     return render_template('home.html')
@@ -45,6 +44,7 @@ def get_weather_route():
         return render_template('home.html', weather=None, today=datetime.now(), dates=[], error="Error processing location")
 
 # Routes to the login page.
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

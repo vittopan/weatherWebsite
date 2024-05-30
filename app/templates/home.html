@@ -1,6 +1,20 @@
 {% extends 'index.html' %}
 {% block content %}
-
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <form id="weatherForm" class="mt-3" method="POST" action="/get_weather">
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input style="width: 300px;" type="text" class="form-control" id="location" name="location" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get Weather</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
 <!-- Main container to show the weather details. -->
 <div class="container text-white">
     {%if weather%}

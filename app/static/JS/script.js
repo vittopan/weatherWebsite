@@ -45,3 +45,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.className = weatherClass; // Ensure no conflicting classes
 });
+
+

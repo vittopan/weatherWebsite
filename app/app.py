@@ -4,6 +4,7 @@ from app.models import db, User
 import requests
 from geopy.geocoders import Nominatim
 from datetime import datetime, timedelta
+from flask import session
 # Get current date
 #date = datetime.now()
 #Below is how to get the next dates.
@@ -21,11 +22,16 @@ with app.app_context():
     db.create_all()
 
 # Routes to the home page endpoint.
+@app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    user = None
+    if 'username' in session:
+        user = User.query.get(session['user_id'])
+        print("hello world")
+    return render_template('home.html', user=user, methods=['POST'])
 
-#routes to the get_weather page
+# Routes to the login page.
 @app.route('/get_weather', methods=['POST'])
 def get_weather_route():
     try:
@@ -44,13 +50,15 @@ def get_weather_route():
         return render_template('home.html', weather=None, today=datetime.now(), dates=[], error="Error processing location")
 
 # Routes to the login page.
-@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
+            session['user_id'] = user.id  # Storing user's ID in session
+            session['username'] = user.username
+            session['location'] = user.location
             flash('Login successful', 'success')
             return redirect(url_for('home'))
         else:

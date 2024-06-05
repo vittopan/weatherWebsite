@@ -52,7 +52,7 @@ hr.solid {
 body.default{
   background: linear-gradient(to right bottom, #1d1e1f, #072d4c, #00387a, #2d3ca4, #742dc2);
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 110vh;
 }
 
 body.sunny{

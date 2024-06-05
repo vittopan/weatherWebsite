@@ -67,15 +67,26 @@ def login():
 
 # Routes to the register page.
 @app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     form = createAccount()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, location=form.location.data)
-        user.set_password(form.password.data)
-        db.session.add(user) #adds user to db
-        db.session.commit() #commits those changes
-        flash('Your account has been created! You are now able to log in', 'success')
-        return redirect(url_for('login'))
+        # Check if username or email already exists
+        existing_user = User.query.filter((User.username == form.username.data) | (User.email == form.email.data)).first()
+        if existing_user:
+            flash('Username or email already exists. Please choose another.', 'danger')
+        else:
+            user = User(username=form.username.data, email=form.email.data, location=form.location.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Your account has been created! You are now able to log in', 'success')
+            return redirect(url_for('login'))
+    else:
+        if request.method == 'POST':
+            # Debugging output
+            print('Form validation failed')
+            print(form.errors)
     return render_template('register.html', form=form)
 
 #This is the helper method used to get all the data and put it into JSON

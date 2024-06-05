@@ -15,7 +15,6 @@ class createAccount(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     location = StringField('Location', validators=[DataRequired(), Length(min=2, max=20)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=2, max=20)])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), Length(min=2, max=20)])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):

@@ -32,65 +32,6 @@
         {%endif%}
     </div>
     <!-- Container to store today's weather details (6 Hours in Advance)-->
-    <div class="container-fluid pt-5 pb-4">
-        <div class="row">
-            <div class="col-md feedBox feedBoxSwell">
-                <h1>Today's Hourly Forecast</h1>
-                <hr class="solid">
-                <div class="container">
-                    <div class="row">
-                        {% for hour in timeAdvance %}
-                            <div class="col no-margin">
-                                {% if hour.strftime('%-I')|int < 10 %}
-                                    <h3>{{ hour.strftime('%-I %p') }}</h3>
-                                {% else %}
-                                    <h3>{{ hour.strftime('%I %p') }}</h3>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="row">
-                        {% for hour in timeAdvance %}
-                            <div class="col no-margin">
-                                <h3>{{weather.temperature | int}}°C</h3>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Container to tell the weekly forecast and show the map-->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Column to show the weekly forecast ahead. -->
-            <div class="col-md-3 pr-4 feedBox feedBoxSwell">
-                <h1>Weekly Forecast</h1>
-                <hr class="solid">
-                <div class="container">
-                    <div class="row">
-                        {% for date in dates %}
-                            <div class="col-6">
-                                <p class="no-margin"><strong>{{ date.strftime("%A") }}</strong></p>
-                                <p class="no-margin">{{ date.strftime("%B %d") }}</p>
-                            </div>
-                            <div class="col-6">
-                                <h3>{{weather.temperature | int}}°C</h3>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            <!-- Column to Store the map -->
-            <div class="col-md feedBox feedBoxSwell" style="height: inherit;">
-                <h1>Map</h1>
-                <hr class="solid">
-                <div style="height: 420px; overflow: hidden;">
-                    <img class="img-fluid" src="../static/Images/MapImage.png" alt="googleMaps" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-md feedBox feedBoxSwell">
@@ -132,6 +73,66 @@
             </div>
         </div>
     </div>
+    <!-- Container to tell the weekly forecast and show the map-->
+    <div class="container-fluid pt-3">
+        <div class="row">
+            <!-- Column to show the weekly forecast ahead. -->
+            <div class="col-md-3 pr-3 feedBox feedBoxSwell">
+                <h1>Weekly Forecast</h1>
+                <hr class="solid">
+                <div class="container">
+                    <div class="row">
+                        {% for date in dates %}
+                            <div class="col-6">
+                                <p class="no-margin"><strong>{{ date.strftime("%A") }}</strong></p>
+                                <p class="no-margin">{{ date.strftime("%B %d") }}</p>
+                            </div>
+                            <div class="col-6">
+                                <h3>{{weather.temperature | int}}°C</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Column to Store the map -->
+            <div class="col-md feedBox feedBoxSwell" style="height: inherit;">
+                <h1>Map</h1>
+                <hr class="solid">
+                <div style="height: 420px; overflow: hidden;">
+                    <img class="img-fluid" src="../static/Images/MapImage.png" alt="googleMaps" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid pt-3 pb-4">
+        <div class="row">
+            <div class="col-md feedBox feedBoxSwell">
+                <h1>Today's Hourly Forecast</h1>
+                <hr class="solid">
+                <div class="container">
+                    <div class="row">
+                        {% for hour in timeAdvance %}
+                            <div class="col no-margin">
+                                {% if hour.strftime('%-I')|int < 10 %}
+                                    <h3>{{ hour.strftime('%-I %p') }}</h3>
+                                {% else %}
+                                    <h3>{{ hour.strftime('%I %p') }}</h3>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        {% for hour in timeAdvance %}
+                            <div class="col no-margin">
+                                <h3>{{weather.temperature | int}}°C</h3>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 {%else%}
     <div class="container text-white" style="height: 30vh; transform: translateY(70%);">
         <div class="row feedBox justify-content-center">

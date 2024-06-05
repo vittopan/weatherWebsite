@@ -12,7 +12,7 @@
   }
 
   .feedBoxSwell{
-    transition: transform 0.2s ease-in-out;
+    transition: transform 1s ease-in-out;
   }
 
   @keyframes bounce{
@@ -21,7 +21,7 @@
   }
 
   .feedBoxSwell:hover {
-    animation: bounce 0.5s 1;
+    animation: bounce 1s 1;
   }
 
 
@@ -50,7 +50,7 @@ hr.solid {
 }
 
 body.default{
-  background: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
+  background: linear-gradient(to right bottom, #1d1e1f, #072d4c, #00387a, #2d3ca4, #742dc2);
   background-repeat: no-repeat;
   height: 100vh;
 }
@@ -81,7 +81,6 @@ body.stormy{
 
 body.snow{
   background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
-
 }
 
 body.mostlyCloudy{
@@ -113,4 +112,54 @@ body.mostlyCloudy{
   background-color: #fff3cd;
   border-color: #ffeeba;
   color: #856404;
+}
+
+.rightbox {
+  width: 50vw; /* You can set a fixed width or a percentage */
+  background-color: white;
+  padding: 20px; /* Optional: Padding for the right side content */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow to the right box */
+  overflow-y: auto; /* Optional: Allows scrolling if content overflows */
+  border-radius: 20px;
+  height: 100vh;
+  position: fixed; /* Fix the box to the right side */
+  top: 0;
+  right: 0;
+}
+
+.leftcontent {
+  width: 50vw; /* You can set a fixed width or a percentage */
+  background-color: white;
+  padding: 20px; /* Optional: Padding for the right side content */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow to the right box */
+  overflow-y: auto; /* Optional: Allows scrolling if content overflows */
+  border-radius: 20px;
+  height: 100vh;
+  position: fixed; /* Fix the box to the right side */
+  top: 0;
+  left: 0;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 450px;
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgb(234, 234, 234);
+}
+
+form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
+input[type="submit"]{
+  width: 450px;
+  
 }

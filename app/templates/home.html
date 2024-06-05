@@ -2,12 +2,11 @@
 {% block content %}
 {%if 'username' in session and request.form['location'] %}
     <header>
-        <div class="container-fluid">
+        <div class="container-fluid pt-5">
             {% if 'username' in session %}
-                <p>Welcome, {{ session.username }}!</p>
                 <form action="{{ url_for('get_weather_route') }}" method="POST">
                     <input type="text" name="location" placeholder="Enter location" required>
-                    <button type="submit">Get Weather</button>
+                    <button class="btn btn-primary" type="submit">Get Weather</button>
                 </form>
                 <a href="{{ url_for('register') }}">Logout</a>
             {% else %}
@@ -134,27 +133,20 @@
         </div>
     </div>
 {%else%}
-    <div class="container feedBox feedBoxSwell justify-content-center align-items-center text-center" style="height: 30vh;">
-        <div class="row">
-            <div class="col">
-                <div class="container">
-                    {% if 'username' in session %}
-                        <h1>Welcome, {{ session.username }}!</h1>
-                        <form action="{{ url_for('get_weather_route') }}" method="POST">
-                            <input type="text" name="location" placeholder="Enter location" required>
-                            <button type="submit">Get Weather</button>
-                        </form>
-                        <a href="{{ url_for('register') }}">Logout</a>
-                    {% else %}
-                        <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
-                    {% endif %}
-                    </div>
+    <div class="container text-white" style="height: 30vh; transform: translateY(70%);">
+        <div class="row feedBox justify-content-center">
+            <div class="col-md-6">
+                {% if 'username' in session %}
+                    <h1>Welcome, {{ session.username }}!</h1>
+                    <form action="{{ url_for('get_weather_route') }}" method="POST">
+                        <input type="text" name="location" placeholder="Enter location" required>
+                        <button class="btn btn-primary"type="submit">Get Weather</button>
+                    </form>
+                    <a href="{{ url_for('register') }}">Logout</a>
+                {% else %}
+                    <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
+                {% endif %}
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-
             </div>
         </div>
     </div>

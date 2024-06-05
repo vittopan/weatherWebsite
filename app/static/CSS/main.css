@@ -11,16 +11,21 @@
     overflow-wrap: normal;
   }
 
-  .feedBoxSwell {
-    transition: margin 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  .feedBoxSwell{
+    transition: transform 0.2s ease-in-out;
   }
 
+  @keyframes bounce{
+    0%, 100%{transform: translateY(0);}
+    50% {transform: translateY(-10px);}
+  }
 
   .feedBoxSwell:hover {
-    margin: 10px;
-    opacity: 0.9;
-    transition: margin 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    animation: bounce 0.5s 1;
   }
+
+
+  
   .feedbox h1 {
     padding-bottom: 2px;
     padding-left: 20px;
@@ -46,14 +51,18 @@ hr.solid {
 
 body.default{
   background: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 body.sunny{
   background: linear-gradient(to bottom, #fddb92 0%, #d1fdff 100%);
+
 }
 
 body.cloudy{
   background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+
 }
 
 
@@ -65,16 +74,19 @@ body.partlyCloudy{
 
 body.stormy{
   background: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+
 }
 
 
 
 body.snow{
   background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+
 }
 
 body.mostlyCloudy{
   background: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+
 }
 
 

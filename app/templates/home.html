@@ -1,157 +1,153 @@
 {% extends 'index.html' %}
 {% block content %}
-{%if 'username' in session and request.form['location'] %}
-    <header>
-        <div class="container-fluid pt-5">
-            {% if 'username' in session %}
-                <form action="{{ url_for('get_weather_route') }}" method="POST">
-                    <input type="text" name="location" placeholder="Enter location" required>
-                    <button class="btn btn-primary" type="submit">Get Weather</button>
-                </form>
-                <a href="{{ url_for('register') }}">Logout</a>
-            {% else %}
-                <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
-            {% endif %}
-            </div>
-        </div>
-    </header>
-<!-- Main container to show the weather details. -->
+{% if 'username' in session %}
+<header>
+    <div class="container-fluid pt-5">
+        <form action="{{ url_for('get_weather_route') }}" method="POST">
+            <input type="text" name="location" placeholder="Enter location" required>
+            <button class="btn btn-primary" type="submit">Get Weather</button>
+        </form>
+        <a href="{{ url_for('register') }}">Logout</a>
+    </div>
+</header>
 
-    <div class="container text-white">
-        {%if weather%}
-        <div class="row">
-            <div class="col text-center">
-                <h1 class="text-center"style="font-size: 50px;">My Location</h1>
-                <h4>{{request.form['location'].capitalize()}}</h4>
-                <h1 class="text-center"style="font-size: 120px;">{{weather.temperature | int}}°</h1>
-                <h3>{{today.strftime("%A %B %d")}}</h3>
-            </div>  
-        </div>
-        {%else%}
-            <p>No weather data available</p>
-        {%endif%}
-    </div>
-    <!-- Container to store today's weather details (6 Hours in Advance)-->
-    <div class="container-fluid pt-4">
-        <div class="row">
-            <div class="col-md feedBox feedBoxSwell">
-                <h1>Weather Information</h1>
-                <hr class="solid">
-                <div class="container">
-                    {%if weather%}
-                    <div class="row">
-                        <div class="col-md text-center">
-                            <h3>Wind Speed</h3>
-                            <h4>{{weather.wind_speed}}</h4>
-                            
-                        </div>
-                        <div class="col-md text-center">
-                            <h3>Humidity</h3>
-                            <h4>{{weather.humidity}}</h4>
-                        </div>
-                        <div class="col-md text-center" id="weatherContainer" data-weather-code="{{weather.weather_code | int}}">
-                            <h3>Conditions</h3>
-                            {%if (weather.weather_code | int) == 1000%}
-                                <img class = "weatherIcon" src="../static/Images/Weather/sunny.png" alt=""><h4>Sunny</h4>
-                            {%elif (weather.weather_code | int) == 1101%}
-                                <img class = "weatherIcon" src="../static/Images/Weather/partlyCloudy.png" alt=""><h4>Partly Cloudy</h4>
-                            {%elif (weather.weather_code | int) == 1001%}
-                                <img class = "weatherIcon" src="../static/Images/Weather/Cloudy.png" alt=""><h4>Cloudy</h4>
-                            {%elif (weather.weather_code | int) == 4001%}
-                                <img  class = "weatherIcon" src="../static/Images/Weather/Rainy.png alt=""><h4>Rainy</h4>
-                            {%elif (weather.weather_code | int) == 5000%}
-                                <img class = "weatherIcon" src="../static/Images/Weather/Snow.png" alt=""><h4>Snow</h4>
-                            {%elif (weather.weather_code | int) == 1102%}
-                                <img class = "weatherIcon" src="../static/Images/Weather/mostlyCloudy.png" alt=""><h4>Mostly Cloudy</h4>
-                            {%else%}
-                                <img class = "weatherIcon" src="../static/Images/Weather/sunny.png" alt=""><h4>Clear</h4>
-                            {%endif%}
-                        </div>
-                    </div>
-                    {%endif%}
-                </div>
-            </div>
+<div class="container text-white">
+    {% if daily_weather %}
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="text-center" style="font-size: 50px;">My Location</h1>
+            <h4>{{ request.form['location'].capitalize() }}</h4>
+            <h1 class="text-center" style="font-size: 120px;">{{ daily_weather[0].temperature | int }}°</h1>
+            <h3>{{ today.strftime("%A %B %d") }}</h3>
         </div>
     </div>
-    <!-- Container to tell the weekly forecast and show the map-->
-    <div class="container-fluid pt-3">
-        <div class="row">
-            <!-- Column to show the weekly forecast ahead. -->
-            <div class="col-md-3 pr-3 feedBox feedBoxSwell">
-                <h1>Weekly Forecast</h1>
-                <hr class="solid">
-                <div class="container">
-                    <div class="row">
-                        {% for date in dates %}
-                            <div class="col-6">
-                                <p class="no-margin"><strong>{{ date.strftime("%A") }}</strong></p>
-                                <p class="no-margin">{{ date.strftime("%B %d") }}</p>
-                            </div>
-                            <div class="col-6">
-                                <h3>{{weather.temperature | int}}°C</h3>
-                            </div>
-                        {% endfor %}
+    {% else %}
+    <p>No weather data available</p>
+    {% endif %}
+</div>
+
+<div class="container-fluid pt-4">
+    <div class="row">
+        <div class="col-md feedBox feedBoxSwell">
+            <h1>Weather Information</h1>
+            <hr class="solid">
+            <div class="container">
+                {% if daily_weather %}
+                <div class="row">
+                    <div class="col-md text-center">
+                        <h3>Wind Speed</h3>
+                        <h4>{{ daily_weather[0].wind_speed }}</h4>
+                    </div>
+                    <div class="col-md text-center">
+                        <h3>Humidity</h3>
+                        <h4>{{ daily_weather[0].humidity }}</h4>
+                    </div>
+                    <div class="col-md text-center" id="weatherContainer" data-weather-code="{{ daily_weather[0].weather_code | int }}">
+                        <h3>Conditions</h3>
+                        {% if (daily_weather[0].weather_code | int) == 1000 %}
+                        <img class="weatherIcon" src="../static/Images/Weather/sunny.png" alt="">
+                        <h4>Sunny</h4>
+                        {% elif (daily_weather[0].weather_code | int) == 1101 %}
+                        <img class="weatherIcon" src="../static/Images/Weather/partlyCloudy.png" alt="">
+                        <h4>Partly Cloudy</h4>
+                        {% elif (daily_weather[0].weather_code | int) == 1001 %}
+                        <img class="weatherIcon" src="../static/Images/Weather/Cloudy.png" alt="">
+                        <h4>Cloudy</h4>
+                        {% elif (daily_weather[0].weather_code | int) == 4001 %}
+                        <img class="weatherIcon" src="../static/Images/Weather/Rainy.png" alt="">
+                        <h4>Rainy</h4>
+                        {% elif (daily_weather[0].weather_code | int) == 5000 %}
+                        <img class="weatherIcon" src="../static/Images/Weather/Snow.png" alt="">
+                        <h4>Snow</h4>
+                        {% elif (daily_weather[0].weather_code | int) == 1102 %}
+                        <img class="weatherIcon" src="../static/Images/Weather/mostlyCloudy.png" alt="">
+                        <h4>Mostly Cloudy</h4>
+                        {% else %}
+                        <img class="weatherIcon" src="../static/Images/Weather/sunny.png" alt="">
+                        <h4>Clear</h4>
+                        {% endif %}
                     </div>
                 </div>
-            </div>
-            <!-- Column to Store the map -->
-            <div class="col-md feedBox feedBoxSwell" style="height: inherit;">
-                <h1>Map</h1>
-                <hr class="solid">
-                <div style="height: 420px; overflow: hidden;">
-                    <img class="img-fluid" src="../static/Images/MapImage.png" alt="googleMaps" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid pt-3 pb-4">
-        <div class="row">
-            <div class="col-md feedBox feedBoxSwell">
-                <h1>Today's Hourly Forecast</h1>
-                <hr class="solid">
-                <div class="container">
-                    <div class="row">
-                        {% for hour in timeAdvance %}
-                            <div class="col no-margin">
-                                {% if hour.strftime('%-I')|int < 10 %}
-                                    <h3>{{ hour.strftime('%-I %p') }}</h3>
-                                {% else %}
-                                    <h3>{{ hour.strftime('%I %p') }}</h3>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="row">
-                        {% for hour in timeAdvance %}
-                            <div class="col no-margin">
-                                <h3>{{weather.temperature | int}}°C</h3>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-{%else%}
-    <div class="container text-white" style="height: 30vh; transform: translateY(70%);">
-        <div class="row feedBox justify-content-center">
-            <div class="col-md-6">
-                {% if 'username' in session %}
-                    <h1>Welcome, {{ session.username }}!</h1>
-                    <form action="{{ url_for('get_weather_route') }}" method="POST">
-                        <input type="text" name="location" placeholder="Enter location" required>
-                        <button class="btn btn-primary"type="submit">Get Weather</button>
-                    </form>
-                    <a href="{{ url_for('register') }}">Logout</a>
-                {% else %}
-                    <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
                 {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-md-3 pr-3 feedBox feedBoxSwell">
+            <h1>Weekly Forecast</h1>
+            <hr class="solid">
+            <div class="container">
+                <div class="row">
+                    {% for date, weather in combined_data %}
+                    <div class="col-6">
+                        <p class="no-margin"><strong>{{ date.strftime("%A") }}</strong></p>
+                        <p class="no-margin">{{ date.strftime("%B %d") }}</p>
+                    </div>
+                    <div class="col-6">
+                        <h3>{{ weather.temperature | int }}°C</h3>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md feedBox feedBoxSwell" style="height: inherit;">
+            <h1>Map</h1>
+            <hr class="solid">
+            <div style="height: 420px; overflow: hidden;">
+                <img class="img-fluid" src="../static/Images/MapImage.png" alt="googleMaps" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-3 pb-4">
+    <div class="row">
+        <div class="col-md feedBox feedBoxSwell">
+            <h1>Today's Hourly Forecast</h1>
+            <hr class="solid">
+            <div class="container">
+                <div class="row">
+                    {% if hourly_weather %}
+                    {% for hour in hourly_weather %}
+                    <div class="col no-margin">
+                        <h3>{{ hour.time }}</h3>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    <div class="row">
+                    {% for hour in hourly_weather %}
+                    <div class="col no-margin">
+                        <h3>{{ hour.temperature | int }}°C</h3>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No hourly weather data available</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-{%endif%}
-<!-- Rememeber if the thing bugs out you, have reached the request limit -->
+</div>
 
+{% else %}
+<div class="container text-white" style="height: 30vh; transform: translateY(70%);">
+    <div class="row feedBox justify-content-center">
+        <div class="col-md-6">
+            {% if 'username' in session %}
+            <h1>Welcome, {{ session.username }}!</h1>
+            <form action="{{ url_for('get_weather_route') }}" method="POST">
+                <input type="text" name="location" placeholder="Enter location" required>
+                <button class="btn btn-primary" type="submit">Get Weather</button>
+            </form>
+            <a href="{{ url_for('register') }}">Logout</a>
+            {% else %}
+            <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock content %}

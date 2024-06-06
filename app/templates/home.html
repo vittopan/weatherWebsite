@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block content %}
-{% if 'username' in session %}
+{% if request.form['location'] %}
 <header>
     <div class="container-fluid pt-5">
         <form action="{{ url_for('get_weather_route') }}" method="POST">
@@ -151,3 +151,4 @@
 </div>
 {% endif %}
 {% endblock content %}
+
